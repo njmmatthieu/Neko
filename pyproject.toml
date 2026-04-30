@@ -1,20 +1,19 @@
 [build-system]
-requires = ["poetry_core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.10.2,<0.11.0"]
+build-backend = "uv_build"
 
-[tool.poetry]
+[project]
 name = "nekomata"
 version = "1.1.0"
 description = "Package to extract, visualize, convert and study interactions from database into executable activity flow based model"
-license = "GNU General Public License Version 3"
 authors = [
-    "Marco Ruscone <marco.ruscone@curie.fr>",
-    "Eirini Tsirvuli <eirini.tsirvouli@ntnu.no>",
-    "Andrea Checcoli <andrea.checcoli@curie.fr>"
+    { name = "Marco Ruscone", email = "marco.ruscone@curie.fr" },
+    { name = "Eirini Tsirvuli", email = "eirini.tsirvouli@ntnu.no" },
+    { name = "Andrea Checcoli", email = "andrea.checcoli@curie.fr" },
 ]
-packages = [
-    { include = "neko" }
-]
+requires-python = ">=3.10,<4.0"
+readme = "README.rst"
+license = "LGPL-3.0-only"
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
@@ -23,59 +22,70 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Natural Language :: English",
-    "Topic :: Scientific/Engineering :: Bio-Informatics"
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
-repository = "https://github.com/sysbio-curie/Neko"
-homepage = "https://github.com/sysbio-curie/Neko"
-documentation = "https://sysbio-curie.github.io/Neko/"
-readme = "README.rst"
+dependencies = [
+    "toml",
+    "notebook",
+    "yfiles_jupyter_graphs",
+    "networkx",
+    "unipressed",
+    "jupyterlab",
+    "pycurl",
+    "graphviz",
+    "pandas==2.2.2",
+    "pypath-common>=0.2.5,<0.3",
+    "omnipath==1.0.9",
+    "pypath-omnipath==0.16.20",
+    "paramiko<4.0.0",
+]
 
-[tool.poetry.dependencies]
-toml = "*"
-notebook = "*"
-python = ">=3.10,<4.0"
-yfiles_jupyter_graphs = "*"
-networkx = "*"
-unipressed = "*"
-jupyterlab = "*"
-pycurl = "*"
-graphviz = "*"
-pandas = "2.2.2"
-pypath-common = "^0.2.5"
-omnipath = "1.0.9"
-pypath-omnipath = "0.16.20"
-paramiko = "<4.0.0"
-
-[tool.poetry.dev-dependencies]
-pandoc = "*"
-pytest = ">=6.0"
-tox = ">=3.20.1"
-pre-commit = ">=2.17.0"
-bump2version = "*"
-coverage = ">=6.0"
-pytest-cov = "^6.0.0"
-codecov-cli = "^0.8.0"
-sphinx = "^7.2.6"
-sphinx-last-updated-by-git = ">=0.3"
-sphinx-autodoc-typehints = ">=1.18.0"
-sphinxcontrib-fulltoc = ">=1.2.0"
-sphinxcontrib-bibtex = "^2.6.2"
-sphinx-copybutton = "*"
-myst-parser = "^2.0.0"
-myst-nb = "*"
-pydata-sphinx-theme = "*"
-sphinx_rtd_theme = "*"
-sphinx-remove-toctrees = "*"
-numpydoc = "*"
-# MkDocs documentation (parallel to Sphinx during transition)
-mkdocs = ">=1.5,<2.0"          # pin below MkDocs 2.0 (incompatible with Material 9.x)
-mkdocs-material = ">=9.5,<10"
-mkdocstrings = {extras = ["python"], version = ">=0.24"}
-mkdocs-jupyter = ">=0.24"
-mkdocs-git-revision-date-localized-plugin = ">=1.2"
-
-[tool.poetry.urls]
+[project.urls]
+Homepage = "https://github.com/sysbio-curie/Neko"
+Repository = "https://github.com/sysbio-curie/Neko"
+Documentation = "https://sysbio-curie.github.io/Neko/"
 "Bug Tracker" = "https://github.com/sysbio-curie/Neko/issues"
+
+[dependency-groups]
+dev = [
+    "pandoc",
+    "pytest>=6.0",
+    "tox>=3.20.1",
+    "pre-commit>=2.17.0",
+    "bump2version",
+    "coverage>=6.0",
+    "pytest-cov>=6.0.0,<7",
+    "codecov-cli>=0.8.0,<0.9",
+    "sphinx>=7.2.6,<8",
+    "sphinx-last-updated-by-git>=0.3",
+    "sphinx-autodoc-typehints>=1.18.0",
+    "sphinxcontrib-fulltoc>=1.2.0",
+    "sphinxcontrib-bibtex>=2.6.2,<3",
+    "sphinx-copybutton",
+    "myst-parser>=2.0.0,<3",
+    "myst-nb",
+    "pydata-sphinx-theme",
+    "sphinx_rtd_theme",
+    "sphinx-remove-toctrees",
+    "numpydoc",
+    "mkdocs>=1.5,<2.0",
+    "mkdocs-material>=9.5,<10",
+    "mkdocstrings[python]>=0.24",
+    "mkdocs-jupyter>=0.24",
+    "mkdocs-git-revision-date-localized-plugin>=1.2",
+]
+
+[tool.uv]
+
+[tool.uv.build-backend]
+module-name = ["neko"]
+module-root = ""
 
 [tool.black]
 line-length = 80
@@ -168,4 +178,18 @@ addopts = [
 ]
 filterwarnings = [
     # "ignore:.*U.*mode is deprecated:DeprecationWarning",
+]
+
+[tool.poetry]
+name = "nekomata"
+version = "1.1.0"
+description = "Package to extract, visualize, convert and study interactions from database into executable activity flow based model"
+license = "GNU General Public License Version 3"
+authors = [
+    "Marco Ruscone <marco.ruscone@curie.fr>",
+    "Eirini Tsirvuli <eirini.tsirvouli@ntnu.no>",
+    "Andrea Checcoli <andrea.checcoli@curie.fr>"
+]
+packages = [
+    { include = "neko" }
 ]
