@@ -40,6 +40,7 @@ dependencies = [
     "pycurl",
     "graphviz",
     "pandas==2.2.2",
+    "pyarrow",
     "pypath-common>=0.2.5,<0.3",
     "omnipath==1.0.9",
     "pypath-omnipath==0.16.20",
